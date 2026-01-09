@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GA REPORTER</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      /* School branding colors (based on logo) */
+      --primary: #1f2933;   /* dark charcoal */
+      --accent: #eab308;    /* golden yellow */
+      --bg: #f9fafb;        /* light background */
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --success: #15803d;   /* green accent */
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .app {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 16px 14px 28px;
+    }
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 0 18px;
+    }
+    .logo {
+      width: 64px; /* small & visible */
+      height: 64px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    }
+    h1 {
+      font-size: 1.25rem;
+      margin: 6px 0 0;
+      letter-spacing: .3px;
+    }
+    .subtitle {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 18px 14px;
+      border-radius: 14px;
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      border: 1px solid #e5e7eb;
+    }
+    .btn:active {
+      transform: translateY(1px) scale(.99);
+      box-shadow: 0 6px 16px rgba(0,0,0,.1);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #facc15);
+      color: #1f2933;
+      border: none;
+    }
+    footer {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px dashed #e5e7eb;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+  /* Splash screen */
+    #splash {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, var(--primary), #000000);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: var(--accent);
+    }
+    #splash img { width: 80px; height: 80px; margin-bottom: 12px; }
+    #pinGate {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9000;
+    }
+    .pin-box {
+      background: #fff;
+      padding: 22px;
+      border-radius: 16px;
+      width: 90%; max-width: 320px;
+      text-align: center;
+    }
+    .pin-box input {
+      width: 100%; padding: 12px; margin-top: 10px;
+      border-radius: 10px; border: 1px solid #cbd5f5;
+      text-align: center; font-size: 1.1rem;
+    }
+    .offline {
+      display:none; margin: 12px 0; padding: 10px;
+      background:#fee2e2; color:#7f1d1d;
+      border-radius:10px; text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <div id="splash">
+    <strong>GA REPORTER</strong>
+  </div>
+  <div id="pinGate">
+    <div class="pin-box">
+      <strong>Enter Access PIN</strong>
+      <input type="password" id="pinInput" placeholder="****" />
+      <a class="btn primary" style="margin-top:12px" onclick="checkPin()">Unlock</a>
+    </div>
+  </div>
+  <div class="app">
+    <header>
+      <!-- Replace src with the uploaded logo file path when hosting -->
+      
+      <h1>GA REPORTER</h1>
+    </header>
+
+    <div class="offline" id="offlineMsg">You are offline. Internet connection is required.</div>
+    <section class="grid">
+      <a class="btn primary" href="https://forms.gle/QVLjuyta21LbEWsd8" target="_blank" rel="noopener">Routines</a>
+      <a class="btn" href="https://forms.gle/PP4Chv84DfwqQTUv6" target="_blank" rel="noopener">Register</a>
+      <a class="btn" href="https://forms.gle/FfoZmsPaWM5GjavZ7" target="_blank" rel="noopener">Class Attendance</a>
+      <a class="btn" href="https://forms.gle/9uM9rJkA8ngSQz7d8" target="_blank" rel="noopener">School Bus Driver’s Report</a>
+      <a class="btn" href="https://forms.gle/SpgCDv9giecBwpys5" target="_blank" rel="noopener">Disciplinary Board</a>
+    </section>
+
+    <footer>
+      <div><strong>Powered By JangAfrica</strong></div>
+      <div>info.jangafrica@gmail.com</div>
+      <div>+ (220) 594 4287 / 263 0798</div>
+    </footer>
+  </div>
+  <script>
+    const CORRECT_PIN = 'ga26'; // CHANGE THIS PIN
+
+    window.onload = () => {
+      setTimeout(()=>{
+        document.getElementById('splash').style.display='none';
+        document.getElementById('pinGate').style.display='flex';
+      },1500);
+      updateOnlineStatus();
+    };
+
+    function checkPin(){
+      const val = document.getElementById('pinInput').value;
+      if(val === CORRECT_PIN){
+        document.getElementById('pinGate').style.display='none';
+      } else { alert('Incorrect PIN'); }
+    }
+
+    function updateOnlineStatus(){
+      document.getElementById('offlineMsg').style.display = navigator.onLine ? 'none':'block';
+    }
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+  </script>
+</body>
+</html>
