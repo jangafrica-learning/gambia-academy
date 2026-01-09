@@ -1,4 +1,5 @@
 {
+  "id": "com.jangafrica.gareporter",
   "name": "GA REPORTER",
   "short_name": "GA REPORTER",
   "start_url": "./index.html",
@@ -37,5 +38,6 @@
     "shopping",
     "social",
     "utilities"
-  ]
+  ],
+  "id": "GA REPORTER"
 }
